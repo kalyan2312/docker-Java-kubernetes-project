@@ -1,6 +1,15 @@
 pipeline {
     agent any
     stages{
+        stage{
+            ('clean workspace'){
+                steps{
+                    script{
+                        sh "rm -rf JAVA Project 1"
+                    }
+                }
+            }
+        }
         stage('Git clone'){
             steps{
                 sh 'git clone https://github.com/Savitablore/docker-Java-kubernetes-project.git'
@@ -9,7 +18,7 @@ pipeline {
         stage('maven build')
         {
             steps{
-                sh 'mvn install'
+                sh 'mvn install -f /Java Project 1/shopfront/ -DskipTests'
             }
         }
         stage('docker build'){
