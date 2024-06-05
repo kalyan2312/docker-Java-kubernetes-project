@@ -1,0 +1,21 @@
+Copy code
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the code from the repository
+                git branch: 'main', url: 'https://github.com/kalyan2312/docker-Java-kubernetes-project.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // Build the application using Maven
+                sh 'mvn clean package'
+            }
+        }
+    }
+
+}
