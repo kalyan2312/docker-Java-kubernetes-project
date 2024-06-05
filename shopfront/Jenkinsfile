@@ -1,4 +1,3 @@
-
 pipeline {
     agent any
 
@@ -6,16 +5,25 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout the code from the repository
-                git branch: 'main', url: 'https://github.com/kalyan2312/docker-Java-kubernetes-project.git'
+                git branch: 'main', url: 'https://your-repo-url.git'
             }
         }
 
         stage('Build') {
             steps {
-                // Build the application using Maven
-                sh 'mvn install -DskipTests'
+                dir('shopfront') { // Change directory to 'shopfront' where the pom.xml is located
+                    // Build the application using Maven
+                    sh 'mvn clean package -DskipTests'
+                }
             }
         }
-    }
 
-}
+        stage('Docker Build & Push') {
+            steps {
+                dir('shopfront') { // Ensure we are in the correct directory
+                    // Build and push Docker image
+                    script {
+                        def dockerImage = 'your-docker-repo/shopfront'
+                        sh """
+                        docker build -t ${dockerImage}:${BUILD_NUMBER} .
+                        docker push ${dockerIma
