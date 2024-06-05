@@ -26,4 +26,35 @@ pipeline {
                         def dockerImage = 'your-docker-repo/shopfront'
                         sh """
                         docker build -t ${dockerImage}:${BUILD_NUMBER} .
-                        docker push ${dockerIma
+                        docker push ${dockerImage}:${BUILD_NUMBER}
+                        """
+                    }
+                }
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                // Deploy the new Docker image to Kubernetes
+                script {
+                    def k8sNamespace = 'your-namespace'
+                    def k8sDeployment = 'shopfront-deployment'
+                    def dockerImage = 'your-docker-repo/shopfront'
+                    
+                    sh """
+                    kubectl set image deployment/${k8sDeployment} shopfront=${dockerImage}:${BUILD_NUMBER} --namespace=${k8sNamespace}
+                    """
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}
