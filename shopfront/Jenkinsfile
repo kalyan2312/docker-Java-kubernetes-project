@@ -7,8 +7,7 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/Savitablore/docker-Java-kubernetes-project.git'
             }
         }
-        stage('maven build')
-        {
+        stage('maven build'){        
             steps{
                 dir('shopfront'){
                     sh 'mvn clean package -DskipTests'
@@ -18,6 +17,7 @@ pipeline {
             }
         }
         stage('docker build'){
+            steps{
             dir('shopfront'){
                 sh 'sudo docker build -t java-project .'
             }
@@ -25,4 +25,4 @@ pipeline {
         
         }
     }
-
+}
