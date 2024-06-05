@@ -17,6 +17,11 @@ pipeline {
                 
             }
         }
+        stage('docker build'){
+            dir('shopfront'){
+                sh 'sudo docker build -t java-project .'
+            }
+        }
         
         }
     }
