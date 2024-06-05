@@ -23,10 +23,10 @@ pipeline {
                 dir('shopfront') { // Ensure we are in the correct directory
                     // Build and push Docker image
                     script {
-                        def dockerImage = 'your-docker-repo/shopfront'
+                        def dockerImage = 'kalyan2312/shopfront'
                         sh """
-                        docker build -t ${dockerImage}:${BUILD_NUMBER} .
-                        docker push ${dockerImage}:${BUILD_NUMBER}
+                        sudo docker build -t ${dockerImage}:${BUILD_NUMBER} .
+                        sudo docker push ${dockerImage}:${BUILD_NUMBER}
                         """
                     }
                 }
