@@ -33,5 +33,14 @@ pipeline {
                 }
             }
         }
+        stage('kubernetes'){
+            steps{
+                dir('kubernetes'){
+                    script{
+                        sh 'su - ubuntu -c "minikube kubectl apply -f shopfront-service.yaml"' 
+                    }
+                }
+            }
+        }
     }
 }
