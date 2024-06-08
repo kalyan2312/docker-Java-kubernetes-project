@@ -35,14 +35,14 @@ pipeline {
         }
         stage('kubernetes'){
             steps{
-                dir('kubernetes'){
-                    script{
+                dir('kubernetes') {
+                    script {
                         sh 'chmod 400 "Java key.pem"'
                         sh '''
-                ssh -i "Java key.pem" ubuntu@ec2-18-206-192-146.compute-1.amazonaws.com << EOF
-                    minikube kubectl -- apply -f shopfront-service.yaml
-                EOF
-                '''
+                        ssh -i "Java key.pem" ubuntu@ec2-18-206-192-146.compute-1.amazonaws.com << EOF
+                            minikube kubectl -- apply -f shopfront-service.yaml
+                        EOF
+                        '''
                     }
                 }
             }
