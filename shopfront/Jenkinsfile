@@ -37,7 +37,8 @@ pipeline {
             steps{
                 dir('kubernetes'){
                     script{
-                        sh 'su - ubuntu -c "minikube kubectl apply -f shopfront-service.yaml"' 
+                        sh 'ssh -i "Java key.pem" ubuntu@ec2-18-206-192-146.compute-1.amazonaws.com' 
+                        sh 'minikube kubectl apply -f shopfront-service.yaml'
                     }
                 }
             }
