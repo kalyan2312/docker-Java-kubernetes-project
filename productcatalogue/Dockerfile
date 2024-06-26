@@ -5,3 +5,4 @@ EXPOSE 8020
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","app.jar", "server", "app-config.yml"]
 
 I am adding this comment to test merge conflicts in feature-A
+I am adding this feature in product catalog feature in feature-B
